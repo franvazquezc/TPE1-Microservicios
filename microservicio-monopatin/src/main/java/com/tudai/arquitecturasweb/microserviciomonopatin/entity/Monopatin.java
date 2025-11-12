@@ -14,7 +14,7 @@ import lombok.ToString;
 public class Monopatin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     // Estado
     @Column(nullable = false)
@@ -36,8 +36,8 @@ public class Monopatin {
     private Double longitud;
 
     // Relacion con otros microservicios
-    private Long idViajeActual;
-    private Long idParadaActual;
+    private int idViajeActual;
+    private int idParadaActual;
 
     public Monopatin() {}
 

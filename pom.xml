@@ -16,12 +16,13 @@
     <name>microserviciosLuigiCode</name>
     <description>microserviciosLuigiCode</description>
     <modules>
-        <module>microservicio-mantenimiento</module>
-        <module>microservicio-pago</module>
-        <module>microservicio-monopatines</module>
-        <module>microservicio-paradas</module>
-        <module>microservicio-viajes</module>
+        <module>microservicio-monopatin</module>
         <module>microservicio-usuario</module>
+        <module>microservicio-admin</module>
+        <module>microservicio-viaje</module>
+        <module>microservicio-parada</module>
+        <module>microservicio-tarifa</module>
+        <module>microservicio-commons</module>
     </modules>
     <properties>
         <java.version>21</java.version>
@@ -48,6 +49,36 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-openfeign-core</artifactId>
+            <version>4.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>micro.example</groupId>
+            <artifactId>microservicio-parada</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>micro.example</groupId>
+            <artifactId>microservicio-commons</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -62,6 +93,14 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>

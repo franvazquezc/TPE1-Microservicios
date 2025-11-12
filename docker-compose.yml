@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  usuario-db:
+      image: mysql:8.0
+      command: --default-authentication-plugin=mysql_native_password
+      restart: unless-stopped
+      environment:
+        - MYSQL_DATABASE=Usuario
+        - MYSQL_ROOT_PASSWORD=root
+      ports:
+        - "3307:3306"
+      volumes:
+        - usuario_data:/var/lib/mysql
+
+  monopatin-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=Monopatin
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3308:3306"
+    volumes:
+      - monopatin_data:/var/lib/mysql
+
+  parada-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=Parada
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3309:3306"
+    volumes:
+      - parada_data:/var/lib/mysql
+
+  viaje-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=Viaje
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3310:3306"
+    volumes:
+      - viaje_data:/var/lib/mysql
+
+  tarifa-db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=Tarifa
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3311:3306"
+    volumes:
+      - tarifa_data:/var/lib/mysql
+
+volumes:
+    usuario_data:
+    monopatin_data:
+    parada_data:
+    viaje_data:
+    tarifa_data:
