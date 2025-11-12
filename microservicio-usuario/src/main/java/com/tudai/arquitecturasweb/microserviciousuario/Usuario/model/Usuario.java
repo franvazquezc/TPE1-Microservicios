@@ -33,6 +33,7 @@ public class Usuario {
     @Column(nullable = false)
     int celular;
 
+
     @ManyToMany(mappedBy = "Usuario")
     @JoinTable(
             name = "usuario_cuenta",

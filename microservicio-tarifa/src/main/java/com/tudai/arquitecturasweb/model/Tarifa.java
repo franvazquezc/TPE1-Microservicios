@@ -1,4 +1,4 @@
-package model;
+package com.tudai.arquitecturasweb.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,5 +25,5 @@ public class Tarifa {
     @Column(nullable = false)
     private int extraPorPausa;
     @Column(nullable = false)
-    private LocalDate inicioVigencia;
+    private LocalDate fechaTarifa;
 }

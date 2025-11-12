@@ -22,7 +22,6 @@ public class Viaje {
     private LocalDate fechaViaje;
     private int horaInicio;
     private int horaFin;
-    private LocalDate fecha;
     private int monopatinId;
     private int destinoId;
     private int origenId;

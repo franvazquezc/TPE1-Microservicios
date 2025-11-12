@@ -1,12 +1,13 @@
-package controller;
+package com.tudai.arquitecturasweb.controller;
 
 
-import DTO.TarifaDTO;
-import model.Tarifa;
+import com.tudai.arquitecturasweb.DTO.FacturaDTO;
+import com.tudai.arquitecturasweb.DTO.TarifaDTO;
+import com.tudai.arquitecturasweb.model.Tarifa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.serviceTarifa;
+import com.tudai.arquitecturasweb.service.serviceTarifa;
 
 import java.util.List;
 
@@ -46,5 +47,10 @@ public class controllerTarifa {
     @PutMapping("/{id}")
     public ResponseEntity<TarifaDTO> editarExtraPorPausa(@PathVariable Integer id, @RequestParam int extra) {
         return ResponseEntity.ok(serviceTarifa.editarExtraPorPausa(id, extra));
+    }
+
+    @GetMapping("/factura")
+    public ResponseEntity<FacturaDTO> getFactura(@RequestParam("mesInicio") int mesInicio, @RequestParam("mesFin") int mesFin, @RequestParam int anio) {
+        return ResponseEntity.ok(serviceTarifa.obtenerFactura(mesInicio, mesFin, anio));
     }
 }

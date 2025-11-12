@@ -1,12 +1,14 @@
 package com.tudai.arquitecturasweb.microservicioviaje.service;
 
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.MonopatinDTO;
+import com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO;
 import com.tudai.arquitecturasweb.microservicioviaje.foreign.foreignMonopatin;
 import com.tudai.arquitecturasweb.microservicioviaje.model.Viaje;
 import com.tudai.arquitecturasweb.microservicioviaje.repository.repositoryViaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +44,7 @@ public class serviceViaje {
         v.setHoraInicio(viaje.getHoraInicio());
         v.setMonopatinId(viaje.getMonopatinId());
         v.setKilometros(viaje.getKilometros());
-        v.setFecha(viaje.getFecha());
+        v.setFechaViaje(viaje.getFechaViaje());
         repositoryViaje.save(v);
     }
 
@@ -55,6 +57,11 @@ public class serviceViaje {
             monopatinDTO.add(m);
         }
         return monopatinDTO;
+    }
+
+    public List<UsuariosConMasViajesDTO> getUsuariosConMasViajes(LocalDate inicio, LocalDate fin){
+        List<UsuariosConMasViajesDTO>  usuariosConMasViajesDTO = repositoryViaje.optenerUsuariosMasMonopatines(inicio, fin);
+        return  usuariosConMasViajesDTO;
     }
 
 }

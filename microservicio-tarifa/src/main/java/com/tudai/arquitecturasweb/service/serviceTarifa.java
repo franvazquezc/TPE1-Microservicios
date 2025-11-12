@@ -1,12 +1,15 @@
-package service;
+package com.tudai.arquitecturasweb.service;
 
-import DTO.TarifaDTO;
-import model.Tarifa;
+import com.tudai.arquitecturasweb.DTO.FacturaDTO;
+import com.tudai.arquitecturasweb.DTO.TarifaDTO;
+import com.tudai.arquitecturasweb.model.Tarifa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.repositoryTarifa;
+import com.tudai.arquitecturasweb.repository.repositoryTarifa;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class serviceTarifa {
@@ -33,7 +36,7 @@ public class serviceTarifa {
     public Tarifa update(Tarifa tarifa, int id){
         Tarifa t =  this.getById(id);
         t.setExtraPorPausa(tarifa.getExtraPorPausa());
-        t.setInicioVigencia(tarifa.getInicioVigencia());
+        t.setFechaTarifa(tarifa.getFechaTarifa());
         t.setPrecioPorMinuto(tarifa.getPrecioPorMinuto());
         t.setPrecioPorKilometro(tarifa.getPrecioPorKilometro());
         return repositoryTarifa.save(t);
@@ -48,5 +51,15 @@ public class serviceTarifa {
         tarifaDTO.setPrecioPorKilometro(t.getPrecioPorKilometro());
         tarifaDTO.setPrecioPorMinuto(t.getPrecioPorMinuto());
         return tarifaDTO;
+    }
+
+    public FacturaDTO obtenerFactura(int mesInicio, int mesFin, int anio){
+        FacturaDTO facturaDTO = repositoryTarifa.obtenerTotalFacturado(mesInicio, mesFin, anio);
+        return facturaDTO;
+    }
+
+    public Tarifa actualizarPrecio(LocalDate actualizo){
+        //LocalDate fechaActual = LocalDate.now();
+        return repositoryTarifa.encontrarTarifaPorCorte(actualizo).orElseThrow(()->new RuntimeException("Tarifa no encontrado"));
     }
 }

@@ -1,8 +1,10 @@
 package com.tudai.arquitecturasweb.microservicioviaje.repository;
 
+import com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO;
 import com.tudai.arquitecturasweb.microservicioviaje.model.Viaje;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -13,6 +15,12 @@ public interface repositoryViaje extends JpaRepository<Viaje, Integer> {
 
     @Query("SELECT v.monopatinId FROM Viaje v WHERE FUNCTION('year', v.fechaViaje) = :anio GROUP BY v.monopatinId " +
             "HAVING COUNT(v) > :veces")
-    List<Integer> viajesXMonopatin(int veces, int anio);
+    List<Integer> viajesXMonopatin(@Param("veces") int veces, @Param("anio") int anio);
 
+    @Query("SELECT new com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO(v.idUsuario, :inicio,  :fin, COUNT(v.id)) " +
+            "FROM Viaje v " +
+            "WHERE v.fechaViaje BETWEEN :inicio AND :fin " +
+            "GROUP BY v.idUsuario " +
+            "ORDER BY COUNT(v.id) DESC")
+    List<UsuariosConMasViajesDTO> optenerUsuariosMasMonopatines(@Param("inicio") LocalDate inicio, @Param("fin") LocalDate fin);
 }
