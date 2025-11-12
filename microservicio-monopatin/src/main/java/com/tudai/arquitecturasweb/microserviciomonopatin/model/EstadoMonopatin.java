@@ -1,7 +1,7 @@
 package com.tudai.arquitecturasweb.microserviciomonopatin.model;
 
 public enum EstadoMonopatin {
-    ESTACIONADO,
+    DISPONIBLE,
     EN_USO,
     PAUSA,
     MANTENIMIENTO

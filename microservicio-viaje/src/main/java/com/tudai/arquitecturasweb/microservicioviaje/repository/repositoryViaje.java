@@ -1,6 +1,7 @@
 package com.tudai.arquitecturasweb.microservicioviaje.repository;
 
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO;
+import com.tudai.arquitecturasweb.microservicioviaje.dto.usoCuentaDTO;
 import com.tudai.arquitecturasweb.microservicioviaje.model.Viaje;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,10 @@ public interface repositoryViaje extends JpaRepository<Viaje, Integer> {
             "GROUP BY v.idUsuario " +
             "ORDER BY COUNT(v.id) DESC")
     List<UsuariosConMasViajesDTO> optenerUsuariosMasMonopatines(@Param("inicio") LocalDate inicio, @Param("fin") LocalDate fin);
+
+    @Query("SELECT new com.tudai.arquitecturasweb.microservicioviaje.dto.usoCuentaDTO(SUM(v.horaInicio + v.horaFin), SUM(v.kilometros), COUNT(v.id)) " +
+            "FROM Viaje v WHERE " +
+            "v.idUsuario = :idUsuario AND " +
+            "v.fechaViaje BETWEEN :fechaInicio AND :fechaFin GROUP BY v.idUsuario")
+    usoCuentaDTO obtenerTopUsuarios(@Param("fechaInicio") LocalDate fechaInicio, @Param("fechaFin") LocalDate fechaFin, @Param("idUsuario") int idUsuario);
 }

@@ -54,8 +54,8 @@ public class serviceTarifa {
     }
 
     public FacturaDTO obtenerFactura(int mesInicio, int mesFin, int anio){
-        FacturaDTO facturaDTO = repositoryTarifa.obtenerTotalFacturado(mesInicio, mesFin, anio);
-        return facturaDTO;
+        FacturaDTO factura = repositoryTarifa.obtenerTotalFacturado(mesInicio, mesFin, anio);
+        return factura;
     }
 
     public Tarifa actualizarPrecio(LocalDate actualizo){

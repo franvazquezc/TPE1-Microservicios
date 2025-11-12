@@ -2,6 +2,7 @@ package com.tudai.arquitecturasweb.microservicioviaje.controller;
 
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.MonopatinDTO;
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO;
+import com.tudai.arquitecturasweb.microservicioviaje.dto.usoCuentaDTO;
 import com.tudai.arquitecturasweb.microservicioviaje.model.Viaje;
 import com.tudai.arquitecturasweb.microservicioviaje.service.serviceViaje;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,8 @@ public class controllerViaje {
         return ResponseEntity.ok(serviceViaje.getUsuariosConMasViajes(inicio, fin));
     }
 
+    @GetMapping("/obtenerRegistroUsuario/{id}")
+    public ResponseEntity<usoCuentaDTO> obtenerRegistroUsuario(@PathVariable int id, @RequestParam LocalDate inicio, @RequestParam LocalDate fin) {
+        return ResponseEntity.ok(serviceViaje.usoDeCuenta(inicio, fin, id));
+    }
 }

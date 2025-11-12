@@ -1,6 +1,7 @@
 package com.tudai.arquitecturasweb.microserviciomonopatin.service;
 
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.ParadaDTO;
+import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.MonopatinDisponibleDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.monopatinDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.entity.Monopatin;
 import com.tudai.arquitecturasweb.microserviciomonopatin.foreign.foreignParada;
@@ -81,6 +82,22 @@ public class MonopatinService {
 
     public List<monopatinDTO> getReporteKilometrosYTiempo(int kilometros, int tiempo){
         List<monopatinDTO> lista = monopatinRepository.reporteMonopatinKilometrosYTiempo(kilometros, tiempo);
+        return lista;
+    }
+
+    public List<MonopatinDisponibleDTO> getMonopatinesDisponibles(double lat, double lon, double radioKm){
+
+        double latDelta = radioKm / 111.0;
+        double lonDelta = radioKm / (111.0 * Math.cos(Math.toRadians(lat)));
+
+        double minLat = lat - latDelta;
+        double maxLat = lat + latDelta;
+        double minLon = lon - lonDelta;
+        double maxLon = lon + lonDelta;
+        EstadoMonopatin estado = EstadoMonopatin.DISPONIBLE;
+
+        List<MonopatinDisponibleDTO> lista = monopatinRepository.obtenerMonopatinesCercanos(minLat, maxLat, minLon, maxLon, estado);
+
         return lista;
     }
 }

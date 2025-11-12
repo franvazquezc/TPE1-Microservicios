@@ -2,6 +2,7 @@ package com.tudai.arquitecturasweb.microservicioviaje.service;
 
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.MonopatinDTO;
 import com.tudai.arquitecturasweb.microserviciocommons.dtos.UsuariosConMasViajesDTO;
+import com.tudai.arquitecturasweb.microservicioviaje.dto.usoCuentaDTO;
 import com.tudai.arquitecturasweb.microservicioviaje.foreign.foreignMonopatin;
 import com.tudai.arquitecturasweb.microservicioviaje.model.Viaje;
 import com.tudai.arquitecturasweb.microservicioviaje.repository.repositoryViaje;
@@ -64,4 +65,8 @@ public class serviceViaje {
         return  usuariosConMasViajesDTO;
     }
 
+    public usoCuentaDTO usoDeCuenta(LocalDate fechaInicio, LocalDate fechaFin, int idUsuario){
+        usoCuentaDTO usoCuentaDTO = repositoryViaje.obtenerTopUsuarios(fechaInicio, fechaFin, idUsuario);
+        return usoCuentaDTO;
+    }
 }

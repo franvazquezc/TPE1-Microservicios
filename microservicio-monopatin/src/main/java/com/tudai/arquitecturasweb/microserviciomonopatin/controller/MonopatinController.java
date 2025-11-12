@@ -1,10 +1,12 @@
 package com.tudai.arquitecturasweb.microserviciomonopatin.controller;
 
+import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.MonopatinDisponibleDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.monopatinDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.entity.Monopatin;
 import com.tudai.arquitecturasweb.microserviciomonopatin.model.EstadoMonopatin;
 import com.tudai.arquitecturasweb.microserviciomonopatin.service.MonopatinService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +58,10 @@ public class MonopatinController {
     @GetMapping("/reporte/kilometrosyTiempo")
     public ResponseEntity<List<monopatinDTO>> reporteKilometrosyTiempo(@RequestParam int kilometros, @RequestParam int min) {
         return ResponseEntity.ok(monopatinService.getReporteKilometrosYTiempo(kilometros, min));
+    }
+
+    @GetMapping("/monopatinesDisponibles")
+    public ResponseEntity<List<MonopatinDisponibleDTO>> buscarMonopatines(@RequestParam("lat") double lat, @RequestParam("lon") double lon, @RequestParam(defaultValue = "1.0") double radio) {
+        return ResponseEntity.ok(monopatinService.getMonopatinesDisponibles(lat, lon, radio));
     }
 }

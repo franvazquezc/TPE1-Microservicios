@@ -33,6 +33,11 @@ public class Usuario {
     @Column(nullable = false)
     int celular;
 
+    @Column(nullable = false)
+    double latitud;
+
+    @Column(nullable = false)
+    double longitud;
 
     @ManyToMany(mappedBy = "Usuario")
     @JoinTable(

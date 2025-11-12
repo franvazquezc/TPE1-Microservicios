@@ -1,8 +1,10 @@
 package com.tudai.arquitecturasweb.microserviciomonopatin.repository;
 
+import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.MonopatinDisponibleDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.DTO.monopatinDTO;
 import com.tudai.arquitecturasweb.microserviciomonopatin.entity.Monopatin;
 
+import com.tudai.arquitecturasweb.microserviciomonopatin.model.EstadoMonopatin;
 import com.tudai.arquitecturasweb.model.Parada;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,4 +24,10 @@ public interface MonopatinRepository extends JpaRepository<Monopatin, Integer> {
             "com.tudai.arquitecturasweb.microserviciomonopatin.model.EstadoMonopatin.EN_USO)")
     List<monopatinDTO> reporteMonopatinKilometrosYTiempo(int km, int min);
 
+    @Query("SELECT new com.tudai.arquitecturasweb.microserviciomonopatin.DTO.MonopatinDisponibleDTO(m.id, m.estado, m.latitud, m.longitud, m.idParadaActual) " +
+            "FROM Monopatin m WHERE " +
+            "m.latitud BETWEEN :minLat AND :maxLat " +
+            "AND m.longitud BETWEEN :minLon AND :maxLon " +
+            "AND m.estado = :estado")
+    List<MonopatinDisponibleDTO> obtenerMonopatinesCercanos(double minLat, double maxLat,double minLon, double maxLon, EstadoMonopatin estado);
 }
